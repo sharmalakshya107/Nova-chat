@@ -19,10 +19,9 @@ const registerShutdown = (server: http.Server): void => {
   process.on("SIGINT", () => shutdown("SIGINT"));
 };
 
-const start = async (): Promise<void> => {
-  await connectDatabase();
-
+const start = (): void => {
   const server = http.createServer(createApp());
+
   server.listen(env.port, () => {
     logger.info("Server started", {
       port: env.port,
@@ -37,6 +36,12 @@ const start = async (): Promise<void> => {
   });
 
   registerShutdown(server);
+
+  connectDatabase().catch((error: unknown) => {
+    logger.error("Database connection failed at startup", {
+      error: error instanceof Error ? error.message : String(error),
+    });
+  });
 };
 
-void start();
+start();
