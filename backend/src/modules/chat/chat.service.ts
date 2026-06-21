@@ -13,7 +13,7 @@ import {
   buildKnowledgeContext,
   findRelevantEntries,
 } from "@modules/knowledge/knowledge.service";
-import { SUPPORT_EMAIL } from "@modules/knowledge/knowledge.data";
+import { KNOWLEDGE_BASE, SUPPORT_EMAIL } from "@modules/knowledge/knowledge.data";
 import { type KnowledgeEntry } from "@modules/knowledge/knowledge.types";
 import { buildChatMessages } from "./chat.prompt";
 import {
@@ -38,7 +38,7 @@ const GREETING_REPLY =
   "Hi there! 👋 I'm the Nova Gear support assistant. I can help with shipping, returns, refunds, warranty, payments, and order questions. What can I help you with?";
 
 const THANKS_REPLY =
-  "You're welcome! Is there anything else I can help you with — shipping, returns, or an order question?";
+  "You're welcome! Is there anything else I can help you with - shipping, returns, or an order question?";
 
 const NO_MATCH_REPLY =
   `I'm not sure about that one specifically, but I can help with our products, shipping, returns and refunds, warranty, payments, and tracking or changing an order. Try asking about one of those, or email our team at ${SUPPORT_EMAIL} and they'll be glad to help.`;
@@ -94,7 +94,12 @@ const prepareContext = async (
   return {
     conversationId: conversation.id,
     history,
-    knowledgeContext: buildKnowledgeContext(relevantEntries),
+    // The full KB is small (~2k tokens), so we hand the model everything and
+    // let it do the retrieval itself. This is more accurate than keyword
+    // pre-filtering, which can crowd out a relevant entry on multi-topic
+    // questions. `relevantEntries` is still used by the offline fallback,
+    // which needs to pick a single best answer without an LLM.
+    knowledgeContext: buildKnowledgeContext(KNOWLEDGE_BASE),
     relevantEntries,
   };
 };
