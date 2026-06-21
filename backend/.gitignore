@@ -1,0 +1,16 @@
+node_modules/
+build/
+dist/
+
+# Env files — never commit real secrets. Only the example template is tracked.
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
