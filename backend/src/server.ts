@@ -22,7 +22,7 @@ const registerShutdown = (server: http.Server): void => {
 const start = (): void => {
   const server = http.createServer(createApp());
 
-  server.listen(env.port, () => {
+  server.listen(env.port, "0.0.0.0", () => {
     logger.info("Server started", {
       port: env.port,
       env: env.nodeEnv,
