@@ -13,4 +13,4 @@ RUN npm run build
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/server.js"]
+CMD ["sh", "-c", "echo '[CMD] container started'; node -v; echo '[CMD] listing dist:'; ls -la dist || echo '[CMD] NO dist DIRECTORY'; echo '[CMD] running migrate...'; npx prisma migrate deploy; echo \"[CMD] migrate exit=$?\"; echo '[CMD] launching node...'; node dist/server.js; echo \"[CMD] node EXITED code=$?\""]
