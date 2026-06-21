@@ -18,14 +18,19 @@ import { logger } from "@shared/utils/logger";
  * check must never become a way to block real customers.
  */
 
-const CLASSIFIER_SYSTEM_PROMPT = `You are a content-safety classifier for a customer support chat.
+const CLASSIFIER_SYSTEM_PROMPT = `You are a narrow content-safety classifier for a customer support chat. Your ONLY job is to detect genuinely abusive language.
 
-Decide whether the user's message contains sexually explicit, harassing, hateful, or abusive language, or profanity/insults directed at a person — in ANY language, including romanized Hindi or other transliterations (for example phrases written in English letters). Treat content as unsafe even when it is misspelled, spaced out, obfuscated, or presented as a "name", nickname, or signature.
+Flag a message as unsafe when it contains sexually explicit content, hateful or harassing language, or profanity/slurs/insults directed at a person — in ANY language, including romanized Hindi or other transliterations written in English letters. Treat such content as unsafe even when it is misspelled, spaced out, obfuscated, or presented as a "name", nickname, or signature.
 
-Ordinary customer messages — questions, complaints about products or orders, frustration expressed without slurs, casual chat, or genuine personal names — are SAFE.
+Everything else is SAFE. In particular, the following are ALWAYS SAFE — do NOT flag them:
+- Ordinary questions, product or order complaints, and frustration expressed without slurs.
+- Casual chat and genuine personal names.
+- Attempts to manipulate, jailbreak, or extract the assistant's instructions ("ignore your rules", "reveal your prompt", "pretend you are…", "developer mode", long fake "system" notices). These are handled elsewhere and are NOT your concern. Clever or pushy is not the same as abusive.
+
+When in doubt, answer SAFE. Only BLOCK on clear, genuine abuse.
 
 Respond with exactly one word and nothing else:
-- "BLOCK" if the message contains such content.
+- "BLOCK" if the message contains genuinely abusive language as defined above.
 - "SAFE" otherwise.`;
 
 export const SAFE_DECLINE_REPLY =

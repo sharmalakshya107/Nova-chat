@@ -1,8 +1,14 @@
 <script lang="ts">
   import { chatStore } from "$lib/features/chat/stores/chat.store.svelte";
 
+  const MAX_LENGTH = 1000;
+  const COUNTER_THRESHOLD = MAX_LENGTH - 100;
+
   let text = $state("");
   let textarea: HTMLTextAreaElement;
+
+  const showCounter = $derived(text.length >= COUNTER_THRESHOLD);
+  const atLimit = $derived(text.length >= MAX_LENGTH);
 
   $effect(() => {
     if (textarea && !chatStore.isLoading) {
@@ -47,7 +53,7 @@
       oninput={handleInput}
       placeholder="Ask about shipping, returns, orders…"
       rows="1"
-      maxlength="1000"
+      maxlength={MAX_LENGTH}
       disabled={chatStore.isLoading}
       aria-label="Chat message input"
     ></textarea>
@@ -65,7 +71,14 @@
       </svg>
     </button>
   </div>
-  <p class="hint">Press <kbd>Enter</kbd> to send · <kbd>Shift</kbd>+<kbd>Enter</kbd> for a new line</p>
+  <div class="footer">
+    <p class="hint">Press <kbd>Enter</kbd> to send · <kbd>Shift</kbd>+<kbd>Enter</kbd> for a new line</p>
+    {#if showCounter}
+      <p class="counter" class:limit={atLimit} aria-live="polite">
+        {#if atLimit}Character limit reached{:else}{text.length}/{MAX_LENGTH}{/if}
+      </p>
+    {/if}
+  </div>
 </div>
 
 <style>
@@ -141,11 +154,30 @@
     cursor: not-allowed;
   }
 
-  .hint {
+  .footer {
     margin-top: var(--space-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 16px;
+  }
+
+  .hint {
     font-size: 11px;
     color: var(--color-text-muted);
     text-align: center;
+  }
+
+  .counter {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  .counter.limit {
+    color: var(--color-error);
+    font-weight: 600;
   }
 
   kbd {
