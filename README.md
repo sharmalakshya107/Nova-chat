@@ -1,8 +1,6 @@
 # Nova Gear — AI Live Chat Support Agent
 
-> ## ⚠️ Reviewing this? Read first
-> **The deployed link is already in live AI mode — just open it and chat.**
->
+>https://nova-chat-hazel.vercel.app
 > **Running locally?** The app needs an LLM API key for real AI answers. **Without a key it falls back to an offline FAQ mode** (keyword answers, no live LLM) — a safety net, not the full experience. To run with real AI:
 > ```bash
 > cd backend
