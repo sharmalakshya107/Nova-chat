@@ -3,9 +3,10 @@
   import ThemeToggle from "$lib/shared/components/ThemeToggle.svelte";
   import MessageInput from "./MessageInput.svelte";
   import MessageList from "./MessageList.svelte";
+  import { onMount } from "svelte";
 
-  $effect(() => {
-    chatStore.loadHistory();
+  onMount(() => {
+    void chatStore.loadHistory();
   });
 
   function newChat() {

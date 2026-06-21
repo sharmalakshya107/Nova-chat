@@ -26,6 +26,7 @@ export class ChatStore {
   isInitializing = $state(false);
 
   #sessionId = $state<string | null>(null);
+  #historyLoaded = false;
 
   constructor() {
     if (browser) {
@@ -50,13 +51,18 @@ export class ChatStore {
   }
 
   async loadHistory(): Promise<void> {
+    if (this.#historyLoaded) return;
+    this.#historyLoaded = true;
+
     if (!this.sessionId) {
       this.isInitializing = false;
       return;
     }
     try {
       const response = await chatService.getHistory(this.sessionId);
-      this.messages = response.data.messages;
+      if (this.messages.length === 0) {
+        this.messages = response.data.messages;
+      }
     } catch {
       this.sessionId = null;
     } finally {

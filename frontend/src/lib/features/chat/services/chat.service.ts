@@ -27,13 +27,27 @@ export const chatService = {
     sessionId: string | null,
     signal?: AbortSignal
   ): AsyncGenerator<StreamEvent> {
-    const response = await fetch(`${BASE_URL}/chat/message/stream`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, sessionId }),
-      signal,
-    });
+    let response: Response;
+    try {
+      response = await fetch(`${BASE_URL}/chat/message/stream`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, sessionId }),
+        signal,
+      });
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") throw error;
+      throw new Error(
+        "Can't reach the server. Please check your connection and try again."
+      );
+    }
 
+    if (response.status === 429) {
+      throw new Error("You're sending messages too quickly. Please wait a moment and try again.");
+    }
+    if (response.status >= 500) {
+      throw new Error("The server ran into a problem. Please try again in a moment.");
+    }
     if (!response.ok || !response.body) {
       throw new Error("Unable to reach the assistant. Please try again.");
     }
