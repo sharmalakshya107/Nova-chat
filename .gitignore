@@ -8,7 +8,7 @@ build/
 .vercel/
 .netlify/
 
-# Env files — never commit real secrets
+# Env files - never commit real secrets
 .env
 .env.*
 !.env.example

@@ -1,4 +1,4 @@
-# Backend — Nova Gear Chat API
+# Backend - Nova Gear Chat API
 
 Node.js + TypeScript + Express API. Handles chat messages (streaming and request/response), persists conversations to Postgres via Prisma, and talks to the LLM through an encapsulated provider.
 
@@ -17,12 +17,12 @@ npm run local                   # http://localhost:8000, auto-reload
 
 | Variable | Required | Default | Notes |
 |---|---|---|---|
-| `DATABASE_URL` | yes | — | Postgres connection string. Boot fails fast if missing. |
+| `DATABASE_URL` | yes | - | Postgres connection string. Boot fails fast if missing. |
 | `PORT` | no | `8000` | |
 | `NODE_ENV` | no | `development` | `local` for dev; the loader reads `.env.${NODE_ENV}`. |
 | `FE_BASE_URL` | no | `http://localhost:5173` | Allowed CORS origin. |
-| `OPENAI_API_KEY` | no | — | `sk-...` (OpenAI) or `sk-or-...` (OpenRouter). Unset → offline mode. |
-| `LLM_BASE_URL` | no | — | Set to `https://openrouter.ai/api/v1` for OpenRouter or any OpenAI-compatible endpoint. |
+| `OPENAI_API_KEY` | no | - | `sk-...` (OpenAI) or `sk-or-...` (OpenRouter). Unset → offline mode. |
+| `LLM_BASE_URL` | no | - | Set to `https://openrouter.ai/api/v1` for OpenRouter or any OpenAI-compatible endpoint. |
 | `LLM_MODEL` | no | `gpt-4.1-mini` | Use a namespaced model (e.g. `openai/gpt-4.1-mini`) with OpenRouter. |
 | `LLM_MAX_TOKENS` | no | `600` | |
 | `LLM_TIMEOUT_MS` | no | `15000` | |

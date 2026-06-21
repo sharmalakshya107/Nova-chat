@@ -240,7 +240,7 @@ export const KNOWLEDGE_BASE: KnowledgeEntry[] = [
     category: "products",
     question: "Tell me about the Trailhead 30L Pack.",
     answer:
-      "The Trailhead 30L Pack ($129) is our bestselling daypack — a 30-litre weatherproof pack with a padded laptop sleeve, hip-belt support, and a lifetime-stitching guarantee. Great for day hikes, commuting, and travel.",
+      "The Trailhead 30L Pack ($129) is our bestselling daypack - a 30-litre weatherproof pack with a padded laptop sleeve, hip-belt support, and a lifetime-stitching guarantee. Great for day hikes, commuting, and travel.",
     keywords: [
       "trailhead",
       "pack",
@@ -259,7 +259,7 @@ export const KNOWLEDGE_BASE: KnowledgeEntry[] = [
     category: "products",
     question: "Tell me about the Summit Headlamp.",
     answer:
-      "The Summit Headlamp ($69) puts out 500 lumens with a USB-C rechargeable battery, a red night-mode, and an IPX6 water-resistant rating. It runs up to 40 hours on a charge — built for trails, camping, and power outages.",
+      "The Summit Headlamp ($69) puts out 500 lumens with a USB-C rechargeable battery, a red night-mode, and an IPX6 water-resistant rating. It runs up to 40 hours on a charge - built for trails, camping, and power outages.",
     keywords: [
       "summit",
       "headlamp",
@@ -335,7 +335,7 @@ export const KNOWLEDGE_BASE: KnowledgeEntry[] = [
     category: "products",
     question: "How do I buy or order a product?",
     answer:
-      "You can browse and order any product on the Nova Gear website at novagear.com. Add what you'd like to your cart and check out — orders over $50 ship free. I can't place an order for you from chat, but I'm happy to help you pick the right product or answer questions before you buy.",
+      "You can browse and order any product on the Nova Gear website at novagear.com. Add what you'd like to your cart and check out - orders over $50 ship free. I can't place an order for you from chat, but I'm happy to help you pick the right product or answer questions before you buy.",
     keywords: [
       "order",
       "buy",
@@ -355,7 +355,7 @@ export const KNOWLEDGE_BASE: KnowledgeEntry[] = [
     category: "policies",
     question: "What is your privacy policy / how is my data handled?",
     answer:
-      "We collect only what we need to process your order — name, contact, shipping address, and order details — and we never sell your personal data. Payment details are handled by a PCI-compliant processor, not stored on our servers. You can ask us to access or delete your data any time by emailing support@novagear.com. Full policy: novagear.com/privacy.",
+      "We collect only what we need to process your order - name, contact, shipping address, and order details - and we never sell your personal data. Payment details are handled by a PCI-compliant processor, not stored on our servers. You can ask us to access or delete your data any time by emailing support@novagear.com. Full policy: novagear.com/privacy.",
     keywords: [
       "privacy",
       "privacy policy",
@@ -374,7 +374,7 @@ export const KNOWLEDGE_BASE: KnowledgeEntry[] = [
     category: "policies",
     question: "What are your terms and conditions?",
     answer:
-      "Our terms cover how you use the Nova Gear site and buy from us: prices and availability can change, orders are confirmed once payment clears, and our returns, warranty, and shipping policies form part of the agreement. Promotions can't be combined unless stated. The full terms are at novagear.com/terms — ask me about any specific point and I'll explain it.",
+      "Our terms cover how you use the Nova Gear site and buy from us: prices and availability can change, orders are confirmed once payment clears, and our returns, warranty, and shipping policies form part of the agreement. Promotions can't be combined unless stated. The full terms are at novagear.com/terms - ask me about any specific point and I'll explain it.",
     keywords: [
       "terms",
       "conditions",
@@ -392,7 +392,7 @@ export const KNOWLEDGE_BASE: KnowledgeEntry[] = [
     category: "policies",
     question: "What is your order cancellation policy?",
     answer:
-      "You can cancel an order within 1 hour of placing it, before it enters fulfillment — just email support@novagear.com with your order number. After that the order is on its way and is handled as a return once it arrives. Refunds for cancelled orders go back to your original payment method within 5 to 7 business days.",
+      "You can cancel an order within 1 hour of placing it, before it enters fulfillment - just email support@novagear.com with your order number. After that the order is on its way and is handled as a return once it arrives. Refunds for cancelled orders go back to your original payment method within 5 to 7 business days.",
     keywords: [
       "cancellation",
       "cancellation policy",

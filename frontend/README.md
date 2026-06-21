@@ -1,4 +1,4 @@
-# Frontend — Nova Gear Chat UI
+# Frontend - Nova Gear Chat UI
 
 SvelteKit + Svelte 5 (runes) chat interface. A full-page chat widget with live token streaming, light/dark theming, and conversation restore on reload.
 
@@ -13,7 +13,7 @@ The dev server proxies `/api` to the backend at `http://localhost:8000` (configu
 
 ## Environment variables
 
-None are needed for local dev — the app calls `/api` and Vite proxies it.
+None are needed for local dev - the app calls `/api` and Vite proxies it.
 
 | Variable | Required | Notes |
 |---|---|---|

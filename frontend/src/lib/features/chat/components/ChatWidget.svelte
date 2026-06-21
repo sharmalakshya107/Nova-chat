@@ -29,7 +29,7 @@
         <p class="title">Nova Gear Support</p>
         <p class="status" class:offline={chatStore.degraded}>
           <span class="status-dot" aria-hidden="true"></span>
-          {chatStore.degraded ? "Offline mode — answering from FAQs" : "AI assistant · online"}
+          {chatStore.degraded ? "Offline mode - answering from FAQs" : "AI assistant · online"}
         </p>
       </div>
     </div>

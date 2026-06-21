@@ -5,7 +5,7 @@ async function parseError(response: Response): Promise<string> {
     const body = await response.json();
     return (body.message as string) ?? "Something went wrong";
   } catch {
-    return "Network error — please check your connection";
+    return "Network error - please check your connection";
   }
 }
 

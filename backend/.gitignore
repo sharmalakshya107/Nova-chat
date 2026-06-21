@@ -2,7 +2,7 @@ node_modules/
 build/
 dist/
 
-# Env files — never commit real secrets. Only the example template is tracked.
+# Env files - never commit real secrets. Only the example template is tracked.
 .env
 .env.*
 !.env.example

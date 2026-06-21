@@ -94,11 +94,6 @@ const prepareContext = async (
   return {
     conversationId: conversation.id,
     history,
-    // The full KB is small (~2k tokens), so we hand the model everything and
-    // let it do the retrieval itself. This is more accurate than keyword
-    // pre-filtering, which can crowd out a relevant entry on multi-topic
-    // questions. `relevantEntries` is still used by the offline fallback,
-    // which needs to pick a single best answer without an LLM.
     knowledgeContext: buildKnowledgeContext(KNOWLEDGE_BASE),
     relevantEntries,
   };
