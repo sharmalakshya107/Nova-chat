@@ -94,9 +94,4 @@ Message       id  conversationId →  sender(user|assistant|system)  content  cr
 - **Guardrails:** 15s timeout, one retry on transient 429/5xx, a `max_tokens` cap, and a per-IP rate limit. On failure the user gets a friendly message and nothing broken is persisted.
 
 ---
-
-## Trade-offs & if I had more time
-
 **Left out on purpose:** vector-DB retrieval (KB is small enough to fit in context), Redis (no hot path), auth (not required), and a multi-conversation sidebar (the brief is a single live chat).
-
-**With more time:** an admin view to browse conversations, cursor-based pagination for very long histories (currently capped at 100), embedding-based retrieval if the KB grew, and a second provider wired through the existing seam.
