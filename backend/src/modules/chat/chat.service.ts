@@ -16,6 +16,7 @@ import {
 import { KNOWLEDGE_BASE, SUPPORT_EMAIL } from "@modules/knowledge/knowledge.data";
 import { type KnowledgeEntry } from "@modules/knowledge/knowledge.types";
 import { buildChatMessages } from "./chat.prompt";
+import { isMessageAbusive, SAFE_DECLINE_REPLY } from "./moderation";
 import {
   type ConversationHistory,
   type SendMessageResult,
@@ -143,6 +144,8 @@ export const sendMessage = async (
   if (!provider) {
     reply = composeOfflineReply(message, relevantEntries);
     degraded = true;
+  } else if (await isMessageAbusive(provider, message)) {
+    reply = SAFE_DECLINE_REPLY;
   } else {
     const result = await provider.generateReply(
       buildChatMessages(knowledgeContext, toChatTurns(history), message)
@@ -196,6 +199,16 @@ export async function* streamMessage(
     }
     await safePersistTurn(conversationId, message, reply);
     yield { type: "done", degraded: true };
+    return;
+  }
+
+  if (await isMessageAbusive(provider, message)) {
+    for await (const chunk of streamOfflineReply(SAFE_DECLINE_REPLY)) {
+      reply += chunk;
+      yield { type: "token", value: chunk };
+    }
+    await safePersistTurn(conversationId, message, reply);
+    yield { type: "done", degraded: false };
     return;
   }
 

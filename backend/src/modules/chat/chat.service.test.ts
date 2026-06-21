@@ -169,6 +169,43 @@ describe("sendMessage in live mode", () => {
   });
 });
 
+describe("sendMessage moderation", () => {
+  beforeEach(useLiveMode);
+
+  it("returns a safe decline and skips the main reply when flagged as abusive", async () => {
+    // First generateReply call is the safety classifier → BLOCK.
+    generateReply.mockResolvedValueOnce({ status: "ok", reply: "BLOCK" });
+
+    const result = await sendMessage("an abusive message");
+
+    expect(result.reply.toLowerCase()).toContain("respectful");
+    expect(result.degraded).toBe(false);
+    // Classifier ran once; the main support completion was never requested.
+    expect(generateReply).toHaveBeenCalledTimes(1);
+  });
+
+  it("lets a normal message through when the classifier says SAFE", async () => {
+    generateReply
+      .mockResolvedValueOnce({ status: "ok", reply: "SAFE" })
+      .mockResolvedValueOnce({ status: "ok", reply: "Happy to help!" });
+
+    const result = await sendMessage("what is your return policy?");
+
+    expect(result.reply).toBe("Happy to help!");
+    expect(generateReply).toHaveBeenCalledTimes(2);
+  });
+
+  it("fails open and answers normally when the classifier itself errors", async () => {
+    generateReply
+      .mockRejectedValueOnce(new Error("classifier down"))
+      .mockResolvedValueOnce({ status: "ok", reply: "Still answering." });
+
+    const result = await sendMessage("a normal question");
+
+    expect(result.reply).toBe("Still answering.");
+  });
+});
+
 describe("streamMessage", () => {
   it("offline: emits a session event, streams tokens, and persists once", async () => {
     useOfflineMode();
